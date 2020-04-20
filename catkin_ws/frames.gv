@@ -1,0 +1,8 @@
+digraph G {
+"chassis" -> "left_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 10.251 Hz\nMost recent transform: 1693.900 ( 0.019 sec old)\nBuffer length: 4.097 sec\n"];
+"chassis" -> "right_wheel"[label="Broadcaster: /robot_state_publisher\nAverage rate: 10.251 Hz\nMost recent transform: 1693.900 ( 0.019 sec old)\nBuffer length: 4.097 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1693.919"[ shape=plaintext ] ;
+ }->"chassis";
+}

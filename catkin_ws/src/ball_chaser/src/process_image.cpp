@@ -27,23 +27,21 @@ class SubAndCall
     int right = 2*width/3;
     
     int col = 0;
-    //int px;
-    for(int px=0; px<(sizeof(img.data)-3) ; px+=3)
+    for(int px=0; px<(height*width-3) ; px+=3)
     {   
 
       if ((img.data[px] == 255) && (img.data[px+1] == 255) && (img.data[px+2] == 255))
         { 
-          ROS_INFO("White pixel detected");
           col = px%width;
           if (col<left)
           {
             //drive to left
-            this->drive_robot(0.0, 1.0);          
+            this->drive_robot(0.0, -1.0);          
           }
           else if (col>right)
           {
             //drive to right
-            this->drive_robot(0.0, -1.0);          
+            this->drive_robot(0.0, 1.0);          
           }
           else
           { 
@@ -54,7 +52,6 @@ class SubAndCall
           return;
         }
     }
-    ROS_INFO_STREAM(std::to_string(img.height) + " " + std::to_string(img.width) + " " + std::to_string(sizeof(img.data)));
     this->drive_robot(0.0, 0.0);  
   }
 

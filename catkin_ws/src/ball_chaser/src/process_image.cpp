@@ -16,7 +16,7 @@ class SubAndCall
 
     client.call(cmnd);  
   }
-  void process_image_callback(sensor_msgs::Image const img)
+  void process_image_callback(sensor_msgs::Image const& img)
   {
     int white_pixel = 255;
     
@@ -27,32 +27,34 @@ class SubAndCall
     int right = 2*width/3;
     
     int col = 0;
+    //int px;
+    for(int px=0; px<(sizeof(img.data)-3) ; px+=3)
+    {   
 
-    for(int px=0; px<sizeof(img.data); px++)
-    { 
-      
-      if (img.data[px] == white_pixel)
-        {
+      if ((img.data[px] == 255) && (img.data[px+1] == 255) && (img.data[px+2] == 255))
+        { 
+          ROS_INFO("White pixel detected");
           col = px%width;
           if (col<left)
           {
             //drive to left
-            this->drive_robot(0.0, 0.5);          
+            this->drive_robot(0.0, 1.0);          
           }
           else if (col>right)
           {
             //drive to right
-            this->drive_robot(0.0, -0.5);          
+            this->drive_robot(0.0, -1.0);          
           }
           else
           { 
             //drive straight
-            this->drive_robot(0.5, 0.0);          
+            this->drive_robot(1.0, 0.0);          
           }
           //exit the inner loop is a white pixel is found 
-          break;
+          return;
         }
     }
+    ROS_INFO_STREAM(std::to_string(img.height) + " " + std::to_string(img.width) + " " + std::to_string(sizeof(img.data)));
     this->drive_robot(0.0, 0.0);  
   }
 

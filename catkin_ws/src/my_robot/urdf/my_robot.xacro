@@ -197,4 +197,16 @@
     <parent link = "chassis"/>
     <axis xyz = "0 1 0" rpy = "0 0 0"/> 
   </joint>
+
+<!-- coloring the robot> <!-->
+  <gazebo reference = "chassis">
+    <material>Gazebo/Yellow</material>  
+  </gazebo> 
+  <gazebo reference = "left_wheel">
+    <material>Gazebo/Black</material>  
+  </gazebo>
+  <gazebo reference = "right_wheel">
+    <material>Gazebo/Black</material>  
+  </gazebo>
+  
 </robot>
